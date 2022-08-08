@@ -16,6 +16,9 @@ API para realizar funciones basicas de autenticacion. Derechos de usuario, creac
     
 Herramientas por utilizar en el proyecto
 
+Validador de textos
 https://express-validator.github.io/docs/
+
+Validador de Objetos
 https://joi.dev/api/?v=17.6.0#introduction
 
