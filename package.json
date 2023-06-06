@@ -6,7 +6,7 @@
   "author": "Cristian Gomez Leon",
   "scripts": {
     "build": "babeL src --out-dir build",
-    "start": "node build/index.js",
+    "start": "babel-node index.js",
     "dev": "nodemon src/index.js --exec babeL-node"
   },
   "keywords": [],
