@@ -10,5 +10,6 @@ router.post('/',[authjwt.verifyToken,
 ], userCtrl.createUser);
 
 router.get('/getuser', userCtrl.getUsers);
+router.delete('/removeuser/:id',userCtrl.removeUser)
 
 export default router;
