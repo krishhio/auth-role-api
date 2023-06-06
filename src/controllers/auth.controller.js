@@ -18,12 +18,13 @@ export const signUp = async (req, res)=>{
     
     if(roles){
         const foundRoles = await Role.find({name: {$in:roles}})
-        newUser.roles= foundRoles.map(role => role._id)
+        console.log(foundRoles)
+        newUser.roles= foundRoles.map(role => {role._id})
     } else {
         const role = await Role.findOne({name: "user"})
         newUser.roles = [role._id];
     }
-    console.log("Dato Registrado: ", savedUser);
+    console.log("Dato Registrado: ");
     const savedUser = await newUser.save();
     console.log(savedUser);
     const token= jwt.sign({id: savedUser._id},config.SECRET,{
@@ -33,7 +34,10 @@ export const signUp = async (req, res)=>{
     res.status(200).json({token})
 }
 
- 
+function printArray(myRole){
+    console.log(myRole);
+} 
+
 export const signIn = async (req, res)=>{
     const userFound = await User.findOne({email: req.body.email}).populate('roles')
 

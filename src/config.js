@@ -1,4 +1,4 @@
 export default {
-    SECRET: 'products-api',
+    SECRET: 'dental-api',
     EXPRIRE: 86400
 }
