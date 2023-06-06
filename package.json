@@ -7,7 +7,7 @@
   "scripts": {
     "build": "babeL src --out-dir build",
     "start": "babel-node index.js",
-    "dev": "nodemon src/index.js --exec babeL-node"
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node src/index.js"
   },
   "keywords": [],
   "license": "ISC",
