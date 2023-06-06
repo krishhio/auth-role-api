@@ -8,10 +8,12 @@ import {authjwt} from '../middlewares'
 router.post('/', [authjwt.verifyToken, authjwt.isAdmin], productsCtrl.createProduct)
 router.get('/', authjwt.verifyToken, productsCtrl.getProducts)
 router.get('/:productId',authjwt.verifyToken, productsCtrl.getProductById)
-router.post('/img/:productId',authjwt.verifyToken,imgproductsCtrl.addImageProductById)
+router.post('/img/:productId',imgproductsCtrl.addImageProductById)
+router.get('/img/:productId',imgproductsCtrl.readImageProduct)
 router.get('/category/:productId',authjwt.verifyToken, productsCtrl.getProductByCategory)
 router.put('/:productId',[authjwt.verifyToken, authjwt.isModerator], productsCtrl.updateProductById)
 router.delete('/:productId',[authjwt.verifyToken, authjwt.isModerator], productsCtrl.removeProductById)
 router.delete('/d/:productId',[authjwt.verifyToken, authjwt.isAdmin], productsCtrl.deleteProductById)
+
 
 export default router;

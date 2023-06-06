@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import multer from 'multer';
 import ImageProduct from '../models/ImageProduct';
-import Product from '../models/Product'
+import fs from 'fs';
+
 
 const Storage = multer.diskStorage({
     destination: "uploads",
@@ -17,17 +18,21 @@ const upload = multer({
 
 
 export const addImageProductById=(req,res)=>{
-    console.log('Insertando imagen')
     upload(req,res,(err)=>{
+       // console.log(req.body)
         if(err){
             console.log(err)
         }
         else{
+            console.log('Insertando imagen: '+ req.body.name)
+            console.log('Imagen a insertar:' + req.body.filename)
+            var img = fs.readFileSync(req.file.path);
+            var encode_img = img.toString('base64');
             const newImage = new ImageProduct({
                 idProduct: req.params.productId,
                 name: req.body.name, 
                 image:{
-                    data: req.file.filename,
+                    data: encode_img,
                     contentType:'image/jpeg'
                 }
             })
@@ -35,4 +40,13 @@ export const addImageProductById=(req,res)=>{
             res.status(200).json({"status":"image uploaded successfully"});
         }
     })
+}
+
+
+export const readImageProduct=async (req, res)=>{
+    const idP = req.params.productId;
+    console.log(idP)
+    const imageProduct = await ImageProduct.findById(idP);
+    console.log()
+    res.status(200).json(imageProduct);
 }

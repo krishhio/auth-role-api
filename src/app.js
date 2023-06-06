@@ -1,6 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import pkg from '../package.json'
+import bodyParser from 'body-parser'
 
 import {createRoles} from './libs/initialSetup'
 
@@ -24,7 +25,7 @@ app.get('/',(req,res)=>{
         version: app.get('pkg').version
     });
 });
-
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/products', productsRoutes )
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
